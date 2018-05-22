@@ -48,6 +48,18 @@ CREATE TABLE patients (
     UNIQUE (alias_id, deleted)
 );
 
+CREATE TABLE patient_pregnancy (
+    id INTEGER PRIMARY KEY ASC,
+    patient INTEGER NOT NULL REFERENCES patients(id),
+    onset_date TEXT NOT NULL,
+    delivery_date TEXT NOT NULL,
+    outcome TEXT NOT NULL CHECK (outcome IN ('Term', 'Premature', 'Miscarriage', 'Other', 'Unknown')),
+    created_time TEXT NOT NULL DEFAULT (datetime('now')),
+    created_by_user INTEGER NOT NULL REFERENCES users(id),
+    deleted TEXT NOT NULL, /*0 or deletion time*/
+    UNIQUE (patient, onset_date, deleted)
+);
+
 CREATE TABLE patient_immunisation (
     id INTEGER PRIMARY KEY ASC,
     patient INTEGER NOT NULL REFERENCES patients(id),
