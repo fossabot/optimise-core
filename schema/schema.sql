@@ -3,7 +3,7 @@ PRAGMA foreign_keys = ON;
 
 
 /*add check constaints*/
-/*check if unique constriaints are right*/
+/*check if unique constraints are right*/
 
 
 
@@ -41,6 +41,7 @@ CREATE TABLE patients (
     id INTEGER PRIMARY KEY ASC,
     alias_id TEXT NOT NULL,
     study TEXT NOT NULL,
+    consent INTEGER NOT NULL CHECK (consent IN (0, 1)),
     created_time TEXT NOT NULL DEFAULT (datetime('now')),
     created_by_user INTEGER NOT NULL REFERENCES users(id),
     deleted TEXT NOT NULL, /*0 or deletion time*/
@@ -226,10 +227,6 @@ CREATE TABLE available_clinical_event_types (
 );
 
 INSERT INTO available_clinical_event_types (name) VALUES ('Relapses');
-
-
-
-
 
 CREATE TABLE ordered_tests (
     id INTEGER PRIMARY KEY ASC,
