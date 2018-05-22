@@ -62,13 +62,13 @@ CREATE TABLE patient_immunisation (
 CREATE TABLE patient_demographic_data (
     id INTEGER PRIMARY KEY ASC,
     patient INTEGER NOT NULL REFERENCES patients(id),
-    DOB TEXT NOT NULL,
-    gender TEXT NOT NULL CHECK (gender IN ('male', 'female', 'other/prefer not to say')),
-    dominant_hand TEXT NOT NULL CHECK (dominant_hand IN ('left', 'right', 'ambidextrous', 'amputated')),
-    ethnicity TEXT NOT NULL CHECK (ethnicity IN ('white', 'black', 'chinese', 'other asian', 'native american', 'arab', 'persian', 'other mixed', 'unknown')),
+    dob TEXT NOT NULL,
+    gender TEXT NOT NULL CHECK (gender IN ('Male', 'Female', 'Other', 'Prefer not to say', 'Unknown')),
+    dominant_hand TEXT NOT NULL CHECK (dominant_hand IN ('Left', 'Right', 'Ambidextrous', 'Amputated', 'Unknown')),
+    ethnicity TEXT NOT NULL CHECK (ethnicity IN ('White', 'Asian', 'Black', 'Mixed/Multiple ethnic groups', 'Other ethnic group', 'Unknown')),
     country_of_origin TEXT, /* CHECCCCCCCCCCCCCCK */
-    alcohol_usage TEXT NOT NULL CHECK (alcohol_usage IN ('More than 3 units a day', 'Less than 3 units a day', 'Less than 3 units a week', 'No alcohol consumption', 'unknown')),
-    smoking_history TEXT NOT NULL CHECK (smoking_history IN ('smoker', 'ex-smoker','never smoked', 'electronic cigarette', 'unknown')),
+    alcohol_usage TEXT NOT NULL CHECK (alcohol_usage IN ('More than 3 units a day', 'Less than 3 units a day', 'Less than 3 units a week', 'No alcohol consumption', 'Unknown')),
+    smoking_history TEXT NOT NULL CHECK (smoking_history IN ('Smoker', 'Ex-smoker','Never smoked', 'Electronic cigarette', 'Unknown')),
     created_time TEXT NOT NULL DEFAULT (datetime('now')),
     created_by_user INTEGER NOT NULL REFERENCES users(id),
     deleted TEXT NOT NULL, /*0 or deletion time*/
@@ -282,7 +282,7 @@ INSERT INTO patients (
 
 
 INSERT INTO patient_demographic_data (
-    patient, DOB, gender, dominant_hand, ethnicity, country_of_origin, alcohol_usage, smoking_history, created_by_user, deleted
+    patient, dob, gender, dominant_hand, ethnicity, country_of_origin, alcohol_usage, smoking_history, created_by_user, deleted
 ) VALUES (1, date('now'), 'male', 'right', 'white', 'd', 'More than 3 units a day', 'smoker', 1, 0);
 
 INSERT INTO existing_or_familial_medical_conditions (
