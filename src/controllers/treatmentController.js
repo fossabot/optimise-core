@@ -18,11 +18,8 @@ class TreatmentController {
         createEntry(req, res, 'treatments', entryObj, 'databaseError');
     }
 
-    addTerminationDate(req, res){    //for adding termination date
-        if ('terminatedDate' in req.body && 'terminatedReason' in req.body && req.body.length === 4) {
-            let whereObj = {'ordered_during_visit': req.body.visitId, 'drug': req.body.drugId};
-            updateEntry(req, res, 'treatments', whereObj, newObj, whatIsUpdated, expectedNumAffected /* LT 0 */);
-        }
+    addTerminationDate(req, res){
+
     }
 
     editTreatment(req, res){
