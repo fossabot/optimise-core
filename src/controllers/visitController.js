@@ -3,18 +3,6 @@ const {createEntry, deleteEntry, updateEntry} = require('../utils/controller-uti
 const knex = require('../utils/db-connection');
 
 class VisitController {
-    static getVisitsOfPatient(req, res){
-        if (!isEmptyObject(req.query) && Object.keys(req.query).length === 1 && typeof(req.query.patientId) === 'string') {
-            knex('patients')
-                .select({patientId:'patients.id'}, 'patients.alias_id', {visitId: 'visits.id'}, 'visits.visit_date')
-                .leftOuterJoin('visits', 'patients.id', 'visits.patient')
-                .where({'patients.alias_id': req.query.patientId, 'visits.deleted': 0})
-                .then(result => res.status(200).json(result))
-        } else {
-            res.status(400).send('The query string must have one and only one parameter "patientId"');
-        }
-    }
-
     static createVisit(req, res){
         if (req.body.patientId && req.body.visitDate && validateAndFormatDate(req.body.visitDate)){
             knex('patients')

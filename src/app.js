@@ -39,7 +39,6 @@ app.route('/api/:dataType/data')
    .delete(DataController._RouterDeleteData);
 
 app.route('/api/visits')
-   .get(VisitController.getVisitsOfPatient)
    .post(VisitController.createVisit)
    .delete(VisitController.deleteVisit);
 
