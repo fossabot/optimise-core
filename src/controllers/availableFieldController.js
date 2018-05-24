@@ -16,11 +16,17 @@ class AvailableFieldController {
             case 'testFields':
                 table = 'available_fields_tests';
                 break
-            case 'clinicalEvents':
+            case 'clinicalEventFields':
+                table = 'available_fields_ce';
+                break
+            case 'clinicalEventTypes':
                 table = 'available_clinical_event_types';
                 break
             case 'testTypes':
                 table = 'available_test_types';
+                break
+            case 'drugs':
+                table = 'available_drugs';
                 break
         }
         knex(table)
